@@ -1,0 +1,122 @@
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+
+CREATE TABLE IF NOT EXISTS `agent` (
+  `Agent_No` int(3) NOT NULL,
+  `Given_Name` varchar(64) NOT NULL,
+  `Family_Name` varchar(64) NOT NULL,
+  `Contact` varchar(11) NOT NULL,
+  PRIMARY KEY (`Agent_No`),
+  UNIQUE KEY `Agent No` (`Agent_No`),
+  UNIQUE KEY `Contact` (`Contact`),
+  KEY `fk_family_name` (`Family_Name`),
+  KEY `fk_given_name` (`Given_Name`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+
+
+INSERT INTO `agent` (`Agent_No`, `Given_Name`, `Family_Name`, `Contact`) VALUES
+(111, 'John', 'Ripov', '02034570000'),
+(222, 'Mary', 'Dancing', '07654320243'),
+(333, 'Anil', 'Rating', '01212130321'),
+(444, 'Lim', 'Popo', '09112345432'),
+(555, 'Mary', 'Ripov', '02034567890');
+
+
+CREATE TABLE IF NOT EXISTS `band` (
+  `Band_Name` varchar(64) NOT NULL,
+  `Description` varchar(64) NOT NULL,
+  `Agent` varchar(64) NOT NULL,
+  PRIMARY KEY (`Band_Name`),
+  KEY `Agent` (`Agent`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+
+INSERT INTO `band` (`Band_Name`, `Description`, `Agent`) VALUES
+('Green Dragons', 'Heavy Rock', '222'),
+('Wellies', 'Easy Listening', '333'),
+('Lazy Dancers', 'Garage', '111'),
+('The Vultures', 'Easy Listening', '333'),
+('Future Explosion', 'Heavy Rock', '444'),
+('Killers', 'Heavy Rock', '222');
+
+
+
+CREATE TABLE IF NOT EXISTS `members` (
+  `ID` int(4) NOT NULL,
+  `Title` varchar(5) NOT NULL,
+  `GIven_Name` varchar(64) NOT NULL,
+  `Family_Name` varchar(6) NOT NULL,
+  `DoB` date NOT NULL,
+  `Job_Type` varchar(64) NOT NULL,
+  `Band` varchar(64) NOT NULL,
+  `Status` varchar(9) NOT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+
+
+INSERT INTO `members` (`ID`, `Title`, `GIven_Name`, `Family_Name`, `DoB`, `Job_Type`, `Band`, `Status`) VALUES
+(1111, 'Ms', 'Helen', 'Mirand', '1987-21-12', 'Lead Guitar', 'Green Dragons', 'Active'),
+(1234, 'Mr', 'Jose', 'Jose A', '1977-27-12', 'Bass Guitar', 'Green Dragons', 'Active'),
+(1333, 'Dr', 'Vito', 'Gelato', '1998-06-01', 'Voice Coach', 'Wellies', 'Active'),
+(1344, 'Dr', 'Guy', 'Redmon', '1988-09-02', 'Make-up', 'Killers', 'Active'),
+(1444, 'Ms', 'Maria', 'Partou', '1994-11-03', 'Vocals', 'Wellies', 'Active'),
+(2111, 'Ms', 'Lindsay', 'White', '1999-16-03', 'Dancer', 'Future Explosion', 'Cancelled'),
+(4545, 'Ms', 'Lee', 'Ping', '1999-16-03', 'Lead Guitar', 'Lazy Dancers', 'Active'),
+(2121, 'Mr', 'David', 'Wilkin', '1983-15-07', 'Backing', 'The Vultures', 'Cancelled'),
+(5665, 'Ms', 'Sing', 'Song', '2001-18-03', 'Vocals', 'The Vultures', 'Active'),
+(3333, 'Ms', 'Olenka', 'Sama', '1977-12-12', 'Sound Tech', 'Killers', 'Active'),
+(7271, 'Mr', 'Dan', 'Dreary', '2002-13-07', 'Make-up', 'Wellies', 'Active'),
+(5555, 'Mr', 'Tom', 'Tumbli', '1987-14-09', 'Drums', 'Wellies', 'Active'),
+(6666, 'Mr', 'Fingers', 'Malone', '1987-14-09', 'Guitar', 'Wellies', 'Active');
+(6988, 'Mr', 'Lai', 'Zee', '1979-14-09', 'Roadie', 'Wellies', 'Active'); 
+
+
+
+CREATE TABLE IF NOT EXISTS `performance` (
+  `Number` int(11) NOT NULL,
+  `Stage` int(11) NOT NULL,
+  `Date` date NOT NULL,
+  `Time` time NOT NULL,
+  `Band` varchar(11) NOT NULL,
+  PRIMARY KEY (`Number`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+
+
+INSERT INTO `performance` (`Number`, `Stage`, `Date`, `Time`, `Band`) VALUES
+(1, 1, '25-06', '10:00', 'Wellies'),
+(2, 2, '25-06', '18:00', 'Wellies'),
+(3, 3, '27-06', '12:00', 'The Vulture'),
+(4, 3, '26-06', '18:00', 'Wellies'),
+(5, 3, '26-06', '15:00', 'The Vulture'),
+(6, 1, '25-06', '13:00', 'Killers'),
+(7, 5, '26-06', '13:00', 'Wellies'),
+(8, 6, '27-06', '13:00', 'The Vulture'),
+(9, 2, '26-06', '13:00', 'Killers'),
+(10, 4, '25-06', '16:00', 'Green Drago'),
+(11, 1, '27-06', '14:00', 'Wellies'),
+(12, 4, '25-06', '17:00', 'Lazy Dancer'),
+(13, 6, '26-06', '18:00', 'Green Drago'),
+(14, 4, '26-06', '19:00', '');
+
+
+
+CREATE TABLE IF NOT EXISTS `stage` (
+  `Number` int(3) NOT NULL,
+  `Stage_Name` varchar(46) NOT NULL,
+  `Backstage_Capacity` int(9) NOT NULL,
+  PRIMARY KEY (`Number`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+
+
+INSERT INTO `stage` (`Number`, `Stage_Name`, `Backstage_Capacity`) VALUES
+(1, 'John Peel', 20),
+(2, 'The Bowl', 10),
+(3, 'Main', 30),
+(4, 'The Oasis', 20),
+(5, 'Jam Session', 3),
+(6, 'Premium', 50);
